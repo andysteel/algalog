@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gmail.andersoninfonet.algalog.domain.dto.request.ClienteRequest;
+import com.gmail.andersoninfonet.algalog.domain.dto.response.ClienteResponse;
 import com.gmail.andersoninfonet.algalog.domain.model.Cliente;
 import com.gmail.andersoninfonet.algalog.domain.repository.ClienteRepository;
 import com.gmail.andersoninfonet.algalog.domain.service.ClienteService;
@@ -35,8 +37,12 @@ public class ClienteController {
      * @return ResponseEntity<List<Cliente>>
      */
     @GetMapping
-    public ResponseEntity<List<Cliente>> listar() {
-        return ResponseEntity.ok(this.clienteRepository.findAll());
+    public ResponseEntity<List<ClienteResponse>> listar() {
+        return ResponseEntity.ok(
+            this.clienteRepository.findAll()
+            .stream()
+            .map(cliente -> cliente.toDTO(ClienteResponse.class))
+            .toList());
     }
     
     /**
@@ -44,15 +50,17 @@ public class ClienteController {
      * @return ResponseEntity<Cliente>
      */
     @GetMapping("{clienteId}")
-    public ResponseEntity<Cliente> buscar(@PathVariable final Long clienteId) {
+    public ResponseEntity<ClienteResponse> buscar(@PathVariable final Long clienteId) {
         return clienteRepository.findById(clienteId)
-            .map(ResponseEntity::ok)       
+            .map(cliente -> ResponseEntity.ok(cliente.toDTO(ClienteResponse.class)))       
             .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> adicionar(@RequestBody @Valid final Cliente cliente, final HttpServletRequest request) throws URISyntaxException {
-        return ResponseEntity.created(new URI(request.getRequestURI())).body(this.clienteService.salvar(cliente));
+    public ResponseEntity<ClienteResponse> adicionar(@RequestBody @Valid final ClienteRequest clienteRequest, final HttpServletRequest request) throws URISyntaxException {
+        Cliente cliente = clienteRequest.toEntity(Cliente.class);
+        ClienteResponse clienteResponse = this.clienteService.salvar(cliente).toDTO(ClienteResponse.class);
+        return ResponseEntity.created(new URI(request.getRequestURI())).body(clienteResponse);
     }
 
     /**
@@ -61,13 +69,16 @@ public class ClienteController {
      * @return ResponseEntity<Cliente>
      */
     @PutMapping("{clienteId}")
-    public ResponseEntity<Cliente> atualizar(@PathVariable final Long clienteId, @RequestBody final Cliente cliente) {
+    public ResponseEntity<ClienteResponse> atualizar(@PathVariable final Long clienteId, @RequestBody final ClienteRequest clienteRequest) {
         
         if(!this.clienteRepository.existsById(clienteId)) {
             return ResponseEntity.notFound().build();
         }
+        Cliente cliente = clienteRequest.toEntity(Cliente.class);
         cliente.setId(clienteId);
-        return ResponseEntity.ok(this.clienteService.salvar(cliente));
+        ClienteResponse clienteResponse = this.clienteService.salvar(cliente).toDTO(ClienteResponse.class);
+
+        return ResponseEntity.ok(clienteResponse);
     }
 
     /**

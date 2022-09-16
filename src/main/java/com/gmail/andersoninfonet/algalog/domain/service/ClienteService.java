@@ -9,6 +9,11 @@ import com.gmail.andersoninfonet.algalog.exception.NegocioException;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * {@summary Classe de serviço de operações de banco de dados}
+ * @param clienteRepository ClienteRepository
+ * @since 0.0.1
+ */
 @Service
 @RequiredArgsConstructor
 public class ClienteService {
@@ -21,9 +26,9 @@ public class ClienteService {
      * @since 0.0.1
      */
     @Transactional
-    public Cliente salvar(Cliente cliente) {
+    public Cliente salvar(final Cliente cliente) {
 
-        boolean emailEmUso = this.clienteRepository.findByEmail(cliente.getEmail())
+        final boolean emailEmUso = this.clienteRepository.findByEmail(cliente.getEmail())
                 .stream()
                 .anyMatch(clienteExistente -> !clienteExistente.equals(cliente));
 
@@ -39,7 +44,18 @@ public class ClienteService {
      * @since 0.0.1
      */
     @Transactional
-    public void excluir(Long clienteId) {
+    public void excluir(final Long clienteId) {
         this.clienteRepository.deleteById(clienteId);
+    }
+
+    /**
+     * @param clienteId Long
+     * @return Cliente
+     * @throws NegocioException
+     * @since 0.0.1
+     */
+    public Cliente buscar(final Long clienteId) {
+        return this.clienteRepository.findById(clienteId)
+            .orElseThrow(() -> new NegocioException("Cliente não encontrado."));
     }
 }
