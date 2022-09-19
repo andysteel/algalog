@@ -13,6 +13,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * {@summary A representation of Cliente Entity}
+ * @since 0.0.1
+ */
 @Getter
 @Setter
 @ToString

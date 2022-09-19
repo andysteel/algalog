@@ -3,13 +3,13 @@ package com.gmail.andersoninfonet.algalog.exception;
 /**
  * @since 0.0.1
  */
-public class NegocioException extends RuntimeException {
+public class EntidadeNaoEncontradaException extends NegocioException {
 
     /**
      * @param message String
      * @since 0.0.1
      */
-    public NegocioException(String message) {
+    public EntidadeNaoEncontradaException(String message) {
         super(message);
     }
 
@@ -17,7 +17,7 @@ public class NegocioException extends RuntimeException {
      * @param cause Throwable
      * @since 0.0.1
      */
-    public NegocioException(Throwable cause) {
+    public EntidadeNaoEncontradaException(Throwable cause) {
         super(cause);
     }
 
@@ -26,7 +26,7 @@ public class NegocioException extends RuntimeException {
      * @param cause Throwable
      * @since 0.0.1
      */
-    public NegocioException(String message, Throwable cause) {
+    public EntidadeNaoEncontradaException(String message, Throwable cause) {
         super(message, cause);
     }
 
@@ -37,7 +37,8 @@ public class NegocioException extends RuntimeException {
      * @param writableStackTrace boolean
      * @since 0.0.1
      */
-    public NegocioException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    public EntidadeNaoEncontradaException(String message, Throwable cause, boolean enableSuppression,
+            boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
     

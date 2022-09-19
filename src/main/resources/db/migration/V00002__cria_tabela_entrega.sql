@@ -2,7 +2,7 @@ create sequence log.seq_entrega start 1 increment 1;
 
 create table log.entrega (
     id int8 not null,
-    data_localizacao timestamp,
+    data_finalizacao timestamp,
     data_pedido timestamp not null,
     destinatario_bairro varchar(155) not null,
     destinatario_complemento varchar(155) not null,

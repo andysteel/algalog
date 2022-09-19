@@ -5,6 +5,10 @@ import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * {@summary A request representation of Destinatario}
+ * @since 0.0.1
+ */
 @Setter
 @Getter
 public class DestinatarioRequest {

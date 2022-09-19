@@ -12,6 +12,10 @@ import com.gmail.andersoninfonet.algalog.domain.repository.EntregaRepository;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * {@summary Service class to register Ocorrencia}
+ * @since 0.0.1
+ */
 @RequiredArgsConstructor
 @Service
 public class SolicitacaoEntregaService {
@@ -19,6 +23,11 @@ public class SolicitacaoEntregaService {
     private final ClienteService clienteService;
     private final EntregaRepository entregaRepository;
 
+    /**
+     * @param entrega Entrega
+     * @return Entrega
+     * @since 0.0.1
+     */
     @Transactional
     public Entrega solicitar(Entrega entrega) {
         Cliente cliente = this.clienteService.buscar(entrega.getCliente().getId());

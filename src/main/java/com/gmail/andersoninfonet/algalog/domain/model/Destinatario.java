@@ -6,6 +6,10 @@ import javax.persistence.Embeddable;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * {@summary A representation of Destinatario Entity}
+ * @since 0.0.1
+ */
 @Embeddable
 @Getter
 @Setter

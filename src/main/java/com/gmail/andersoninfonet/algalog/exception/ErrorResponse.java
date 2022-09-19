@@ -7,6 +7,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.gmail.andersoninfonet.algalog.exception.ErrorResponse.Campo;
 
+/**
+ * Class to represent Error response
+ * @since 0.0.1
+ */
 @JsonInclude(Include.NON_NULL)
 public record ErrorResponse(int status, LocalDateTime dataHora, String titulo, List<Campo> campos) {
 

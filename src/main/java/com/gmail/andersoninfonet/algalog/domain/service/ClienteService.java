@@ -5,12 +5,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gmail.andersoninfonet.algalog.domain.model.Cliente;
 import com.gmail.andersoninfonet.algalog.domain.repository.ClienteRepository;
+import com.gmail.andersoninfonet.algalog.exception.EntidadeNaoEncontradaException;
 import com.gmail.andersoninfonet.algalog.exception.NegocioException;
 
 import lombok.RequiredArgsConstructor;
 
 /**
- * {@summary Classe de serviço de operações de banco de dados}
+ * {@summary Service class to manipulate Cliente entity}
  * @param clienteRepository ClienteRepository
  * @since 0.0.1
  */
@@ -56,6 +57,6 @@ public class ClienteService {
      */
     public Cliente buscar(final Long clienteId) {
         return this.clienteRepository.findById(clienteId)
-            .orElseThrow(() -> new NegocioException("Cliente não encontrado."));
+            .orElseThrow(() -> new EntidadeNaoEncontradaException("Cliente não encontrado."));
     }
 }

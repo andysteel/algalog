@@ -8,6 +8,10 @@ import com.gmail.andersoninfonet.algalog.domain.model.enums.StatusEntrega;
 
 import lombok.Data;
 
+/**
+ * {@summary A response representation of Entrega}
+ * @since 0.0.1
+ */
 @Data
 public class EntregaResponse implements ConverterDTO {
     
